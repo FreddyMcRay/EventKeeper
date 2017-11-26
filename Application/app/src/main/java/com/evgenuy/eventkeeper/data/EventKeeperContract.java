@@ -1,4 +1,4 @@
-package data;
+package com.evgenuy.eventkeeper.data;
 
 import android.provider.BaseColumns;
 
