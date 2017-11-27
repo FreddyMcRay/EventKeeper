@@ -3,6 +3,8 @@ package com.evgenuy.eventkeeper.data;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
 import com.evgenuy.eventkeeper.data.EventKeeperContract.EventEntry;
 
 /**
@@ -32,6 +34,8 @@ public class EventKeeperDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-
+        Log.w("SQLite", "Update database from " + oldVersion + " to " + newVersion);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + EventEntry.TABLE_NAME);
+        onCreate(sqLiteDatabase);
     }
 }
