@@ -10,7 +10,6 @@ import java.util.List;
 
 public interface EventDbService {
     List<Event> getEvents();
-    Event getEvent(int id);
     boolean editEvent(Event event);
     Event createEvent(Event event);
     boolean deleteEvent(int id);
