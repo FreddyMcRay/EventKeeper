@@ -12,10 +12,14 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.evgenuy.eventkeeper.Adapters.EventListAdapter;
+import com.evgenuy.eventkeeper.models.Event;
+
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private ListView listView;
-    final String[] items = {"event1", "event2", "event3", "event4", "event5", "event6", "event7", "event8"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +29,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         listView = (ListView) findViewById(R.id.listView);
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, items);
+        EventListAdapter adapter = new EventListAdapter(this, R.layout.list_item, this.GetEvents());
         listView.setAdapter(adapter);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -59,5 +62,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private ArrayList<Event> GetEvents() {
+        ArrayList<Event> events = new ArrayList<>();
+        String date = "2017.12.1";
+        String name = "event";
+        String time = "12:0";
+        for (int i = 0; i < 20; i++) {
+            events.add(new Event(i, name + i % 10, null, date + i % 10, time + i % 10));
+        }
+        return events;
     }
 }
