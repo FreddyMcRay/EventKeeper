@@ -11,10 +11,10 @@ public class Event {
     private int id;
     private String title;
     private String description;
-    private Date dateOn;
-    private Time timeOn;
+    private String dateOn;
+    private String timeOn;
 
-    public Event(int id, String title, String description, Date dateOn, Time timeOn) {
+    public Event(int id, String title, String description, String dateOn, String timeOn) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -34,11 +34,11 @@ public class Event {
         return description;
     }
 
-    public Date getDateOn() {
+    public String getDateOn() {
         return dateOn;
     }
 
-    public Time getTimeOn() {
+    public String getTimeOn() {
         return timeOn;
     }
 }

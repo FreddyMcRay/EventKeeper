@@ -27,17 +27,13 @@ import java.util.Locale;
 public class EventService implements EventDbService {
 
     private EventKeeperDbHelper dbHelper;
-    private DateFormat dateFormat;
-    private DateFormat timeFormat;
 
     public EventService(Context context) {
         dbHelper = new EventKeeperDbHelper(context);
-        dateFormat = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH);
-        timeFormat = new SimpleDateFormat("HH:mm")
     }
 
     @Override
-    public List<Event> getEvents() {
+    public ArrayList<Event> getEvents() {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String[] projection = {
                 EventEntry._ID,
@@ -55,7 +51,7 @@ public class EventService implements EventDbService {
                 null
         );
 
-        return null;
+        return parseQuery(cursor);
     }
 
     @Override
@@ -85,8 +81,8 @@ public class EventService implements EventDbService {
                     cursor.getInt(idColumnIndex),
                     cursor.getString(titleColumnIndex),
                     cursor.getString(descriptionColumnIndex),
-                    dateFormat.parse(cursor.getString(dateColumnIndex)),
-                    new Time(timeFormat.parse(cursor.getString(timeColumnIndex)).getTime())
+                    cursor.getString(dateColumnIndex),
+                    cursor.getString(timeColumnIndex)
             ));
 
         }
